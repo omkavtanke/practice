@@ -70,6 +70,11 @@
 .car-img img:hover{
     transform: scale(1.1);
 }
+
+
+/*Pop up*/
+
+
 .pop-up-block{
     position: fixed;
     top: 0;
@@ -81,13 +86,27 @@
     display: none;
     overflow: hidden;
 }
-.pop-up-block span{
+.icons-block{
+    margin-top: 10px;
+    gap: 20px;
+    display: flex;
     position: absolute;
-    font-weight: 400;
-    font-size: 50px;
-    line-height: 30px;
     top: 0;
     right: 10px;
+    z-index: 2;
+}
+.back-icon{
+    font-weight: 400;
+    font-size: 58px;
+    line-height: 25px;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+}
+.icons-block span:nth-child(1){
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 30px;
     color: white;
     cursor: pointer;
     z-index: 2;
@@ -97,10 +116,11 @@
     top: 47%;
     left: 50%;
     transform:translate(-50%, -50%);
+    transition: linear .2s;
     width: 60%;
     object-fit: cover;
     border-radius: 10px;
-    z-index: 3;
+    z-index: 2;
 
 }
 .pop-up-other-img{

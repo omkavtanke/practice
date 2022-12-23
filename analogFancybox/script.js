@@ -24,7 +24,18 @@ document.querySelectorAll('.pop-up-other-img img').forEach(miniImage => {
 })
 
 //Functional of "Back" button
-document.querySelector('.pop-up-block span').addEventListener("click", () => {
+document.querySelector('.back-icon').addEventListener('click', () => {
   document.querySelector('.pop-up-block').style.display = 'none';
   document.querySelector('body').style.overflowY = 'visible'
+})
+
+//Functional for "minicars" button
+document.querySelector('.material-symbols-outlined').addEventListener('click', () => {
+  if(document.querySelector('.pop-up-other-img').style.display === 'none') {
+    document.querySelector('.pop-up-other-img').style.display = 'flex';
+    document.querySelector('.pop-up-img').style.width = '60%';
+  }else{
+    document.querySelector('.pop-up-other-img').style.display = 'none';
+    document.querySelector('.pop-up-img').style.width = '70%';
+  }
 })
