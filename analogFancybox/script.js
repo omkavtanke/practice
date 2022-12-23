@@ -1,9 +1,9 @@
-const CARS_SRC = ["./images/car-bugatti.jpeg", "./images/car-tuatara.jpeg", "./images/car-rimac.jpeg", "./images/carspeedtail.jpeg","./images/car-valkyrie.jpeg", "./images/car-gemera.jpeg", "./images/car-regera.jpeg", "./images/car-aspark.jpeg", "./images/car-jeska.jpeg", "./images/car-venomf5.jpg"]
+//Pop up functional
 document.querySelectorAll('.cars-photos img').forEach(image =>{
   image.onclick = () => {
-    document.querySelector('.chosen-img').src = image.src;
+    document.querySelector('.pop-up-img').src = image.src;
     document.querySelector('body').style.overflowY = 'hidden'
-    document.querySelector('.chosen-img-block').style.display = 'block';
+    document.querySelector('.pop-up-block').style.display = 'block';
     if(document.querySelector('.chosen-mini-car')){
       document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car')
     }
@@ -11,10 +11,20 @@ document.querySelectorAll('.cars-photos img').forEach(image =>{
     document.querySelector(`.mini-car-${CAR_NUMBER}`).classList.add('chosen-mini-car');
   };
 })
-document.querySelector('.chosen-img-block span').addEventListener("click", () => {
-  document.querySelector('.chosen-img-block').style.display = 'none';
+
+//Functional of image under pop up
+document.querySelectorAll('.pop-up-other-img img').forEach(miniImage => {
+  miniImage.addEventListener('click', () => {
+    document.querySelector('.pop-up-img').src =miniImage.src;
+    if(document.querySelector('.chosen-mini-car')){
+      document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
+    }
+    miniImage.classList.add('chosen-mini-car');
+  })
+})
+
+//Functional of "Back" button
+document.querySelector('.pop-up-block span').addEventListener("click", () => {
+  document.querySelector('.pop-up-block').style.display = 'none';
   document.querySelector('body').style.overflowY = 'visible'
 })
-// document.querySelector('.chosen-img-block').addEventListener("click", () => {
-//   document.querySelector('.chosen-img-block').style.display = 'none';
-// })

@@ -70,7 +70,7 @@
 .car-img img:hover{
     transform: scale(1.1);
 }
-.chosen-img-block{
+.pop-up-block{
     position: fixed;
     top: 0;
     left: 0;
@@ -81,7 +81,7 @@
     display: none;
     overflow: hidden;
 }
-.chosen-img-block span{
+.pop-up-block span{
     position: absolute;
     font-weight: 400;
     font-size: 50px;
@@ -92,7 +92,7 @@
     cursor: pointer;
     z-index: 2;
 }
-.chosen-img{
+.pop-up-img{
     position: absolute;
     top: 47%;
     left: 50%;
@@ -103,7 +103,7 @@
     z-index: 3;
 
 }
-.chosen-other-img{
+.pop-up-other-img{
     position: absolute;
     display: flex;
     justify-content: center;
@@ -114,10 +114,12 @@
     margin-bottom: 20px;
     flex-wrap: wrap;
 }
-.chosen-other-img img{
+.pop-up-other-img img{
+    box-sizing: border-box;
     width: 110px;
     height: 65px;
     border-radius: 10px;
+    cursor: pointer;
 }
 .chosen-mini-car{
     border: 5px solid aqua;
@@ -125,7 +127,7 @@
 
 }
 @media (max-width: 768px){
-    .chosen-img{
+    .pop-up-img{
         width: 90%;
     }
 }
