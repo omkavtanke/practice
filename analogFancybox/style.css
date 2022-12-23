@@ -1,0 +1,76 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+/*Header*/
+
+.header-content{
+    padding-bottom: 25px;
+    font-family: 'Inter';
+    font-style: normal;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #919694;
+}
+.container{
+    width: 1240px;
+    margin: 0 auto;
+}
+.header-logo{
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+.logo-title{
+    font-weight: 700;
+    font-size: 25px;
+}
+.github-logo{
+    width: 30px;
+}
+.header-links{
+    display: flex;
+    align-items: center;
+}
+
+
+/*section photos*/
+.section-photos{
+    margin-top: 30px;
+}
+.photos-title{
+    margin-bottom: 30px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    text-align: center;
+}
+.car-img{
+    width: 400px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.cars-photos{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
