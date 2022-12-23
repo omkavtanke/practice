@@ -20,6 +20,11 @@ document.querySelectorAll('.pop-up-other-img img').forEach(miniImage => {
       document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
     }
     miniImage.classList.add('chosen-mini-car');
+
+  //  check for zoomed image
+    if(document.querySelector('.pop-up-img').style.width === '80%'){
+      document.querySelector('.pop-up-img').style.width = '60%';
+    }
   })
 })
 
@@ -46,5 +51,16 @@ document.querySelector('.zoom-icon').addEventListener('click', () => {
     document.querySelector('.pop-up-img').style.width = '60%';
   }else{
     document.querySelector('.pop-up-img').style.width = '80%';
+  }
+})
+
+//Functional for fullscreen
+document.querySelector('.fullscreen-icon').addEventListener('click',  async() => {
+  if (!window.screenTop && !window.screenY) {
+    document.querySelector('.fullscreen-icon').textContent = 'fullscreen_exit'
+    await document.documentElement.requestFullscreen()
+  }else{
+    document.querySelector('.fullscreen-icon').textContent = 'fullscreen'
+    await document.exitFullscreen()
   }
 })

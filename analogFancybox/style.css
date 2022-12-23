@@ -93,7 +93,14 @@
     position: absolute;
     top: 0;
     right: 10px;
-    z-index: 2;
+    z-index: 3;
+}
+.icons-block span {
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 30px;
+    color: white;
+    cursor: pointer;
 }
 .back-icon{
     font-weight: 400;
@@ -101,23 +108,7 @@
     line-height: 25px;
     color: white;
     cursor: pointer;
-    z-index: 3;
-}
-.icons-block span:nth-child(1){
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 30px;
-    color: white;
-    cursor: pointer;
-    z-index: 3;
-}
-.icons-block span:nth-child(2){
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 30px;
-    color: white;
-    cursor: pointer;
-    z-index: 3;
+    z-index: 4;
 }
 .pop-up-img{
     position: absolute;
