@@ -30,12 +30,21 @@ document.querySelector('.back-icon').addEventListener('click', () => {
 })
 
 //Functional for "minicars" button
-document.querySelector('.material-symbols-outlined').addEventListener('click', () => {
+document.querySelector('.minicars-icon').addEventListener('click', () => {
   if(document.querySelector('.pop-up-other-img').style.display === 'none') {
     document.querySelector('.pop-up-other-img').style.display = 'flex';
     document.querySelector('.pop-up-img').style.width = '60%';
   }else{
     document.querySelector('.pop-up-other-img').style.display = 'none';
     document.querySelector('.pop-up-img').style.width = '70%';
+  }
+})
+
+//Functional for search/zoom icon
+document.querySelector('.zoom-icon').addEventListener('click', () => {
+  if(document.querySelector('.pop-up-img').style.width === '80%') {
+    document.querySelector('.pop-up-img').style.width = '60%';
+  }else{
+    document.querySelector('.pop-up-img').style.width = '80%';
   }
 })

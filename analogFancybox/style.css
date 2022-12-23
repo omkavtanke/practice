@@ -97,19 +97,27 @@
 }
 .back-icon{
     font-weight: 400;
-    font-size: 58px;
+    font-size: 50px;
     line-height: 25px;
     color: white;
     cursor: pointer;
-    z-index: 2;
+    z-index: 3;
 }
 .icons-block span:nth-child(1){
     font-weight: 400;
-    font-size: 40px;
+    font-size: 30px;
     line-height: 30px;
     color: white;
     cursor: pointer;
-    z-index: 2;
+    z-index: 3;
+}
+.icons-block span:nth-child(2){
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 3;
 }
 .pop-up-img{
     position: absolute;
@@ -121,7 +129,7 @@
     object-fit: cover;
     border-radius: 10px;
     z-index: 2;
-
+    overflow: hidden;
 }
 .pop-up-other-img{
     position: absolute;
@@ -133,6 +141,7 @@
     width: 100%;
     margin-bottom: 20px;
     flex-wrap: wrap;
+    z-index: 1;
 }
 .pop-up-other-img img{
     box-sizing: border-box;
