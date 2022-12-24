@@ -141,7 +141,6 @@ function moveRight () {
 // Functional for left arrow
 function moveLeft () {
   const PREV_IMAGE_ID = +document.querySelector('.pop-up-img').getAttribute('data-number') - 1;
-  console.log(PREV_IMAGE_ID)
   document.querySelector('.pop-up-img').src = document.getElementById('' + PREV_IMAGE_ID).src;
   document.querySelector('.pop-up-img').setAttribute('data-number', '' + PREV_IMAGE_ID);
   if(document.querySelector('.pop-up-img').getAttribute('data-number') === '1'){
