@@ -172,6 +172,9 @@
     color: #4d4d4d;
     cursor: none;
 }
+.cars-photos .pop-up-other-img{
+    display: none;
+}
 @media (max-width: 568px){
     .pop-up-other-img{
         display: none;
