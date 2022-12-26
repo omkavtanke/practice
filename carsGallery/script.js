@@ -36,12 +36,17 @@ document.querySelectorAll('.cars-photos img').forEach(image =>{
       document.querySelector('.pop-up-img-block span:first-child').style.color = "white";
       document.querySelector('.pop-up-img-block span:first-child').style.cursor = "pointer";
     }
+    const CAR_NAME = image.getAttribute('data-car-name')
+    const CAR_IMAGES = document.querySelector(`.${CAR_NAME}-other`).innerHTML
+    document.querySelector('.mini-images').innerHTML = CAR_IMAGES;
   };
 })
 
 //Functional of image under pop up
-document.querySelectorAll('.pop-up-other-img img').forEach(miniImage => {
+document.querySelectorAll('.mini-img').forEach(miniImage => {
+  console.log(miniImage, 'upper');
   miniImage.addEventListener('click', () => {
+    console.log(miniImage, 'under');
     document.querySelector('.pop-up-img').src = miniImage.src;
     const MINICAR_NUMBER = miniImage.getAttribute('data-minicar-number');
     document.querySelector('.pop-up-img').setAttribute('data-number', MINICAR_NUMBER);

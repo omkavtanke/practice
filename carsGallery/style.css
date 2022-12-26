@@ -46,14 +46,27 @@
 .photos-title{
     margin-bottom: 30px;
     font-weight: 700;
-    font-size: 30px;
+    font-size: 20px;
     text-align: center;
+}
+.car-block{
+    border: 1px solid darkgray;
+    border-radius: 10px;
 }
 .cars-photos{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+}
+.car-title{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+}
+.car-info{
+    max-width: 320px;
+    margin: 20px auto;
 }
 .car-img{
     max-width: 400px;
