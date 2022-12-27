@@ -12,9 +12,18 @@ document.querySelectorAll('.cars-photos img').forEach(image =>{
     const CAR_NAME = image.getAttribute('data-car-name');
     document.querySelector('.mini-images').innerHTML = document.querySelector(`.${CAR_NAME}-other`).innerHTML;
     document.querySelector(`.pop-up-other .mini-car-${CAR_NAME}-1`).classList.add('chosen-mini-car');
+    //Car info functional
+    const CAR_INFO = document.querySelector(`.${CAR_NAME}-info-text`).innerHTML
+    document.querySelector('.icons-block .car-info-text').innerHTML = CAR_INFO;
 
     //Arrows functional
     firstPage()
+
+    //miniImage functional
+    if(document.querySelector('.pop-up-other').style.display === 'none') {
+      document.querySelector('.pop-up-other').style.display = 'flex';
+      document.querySelector('.pop-up-img').style.width = '60%';
+    }
 
     //Functional of image under pop up
     document.querySelectorAll('.pop-up-other img').forEach(miniImage => {
@@ -54,11 +63,11 @@ document.querySelector('.back-icon').addEventListener('click', () => {
 
 //Functional for "minicars" button
 document.querySelector('.minicars-icon').addEventListener('click', () => {
-  if(document.querySelector('.pop-up-other-img').style.display === 'none') {
-    document.querySelector('.pop-up-other-img').style.display = 'flex';
+  if(document.querySelector('.pop-up-other').style.display === 'none') {
+    document.querySelector('.pop-up-other').style.display = 'flex';
     document.querySelector('.pop-up-img').style.width = '60%';
   }else{
-    document.querySelector('.pop-up-other-img').style.display = 'none';
+    document.querySelector('.pop-up-other').style.display = 'none';
     document.querySelector('.pop-up-img').style.width = '70%';
   }
 })
