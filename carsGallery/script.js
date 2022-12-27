@@ -14,14 +14,7 @@ document.querySelectorAll('.cars-photos img').forEach(image =>{
     document.querySelector(`.pop-up-other .mini-car-${CAR_NAME}-1`).classList.add('chosen-mini-car');
 
     //Arrows functional
-    const CURRENT_IMAGE_ID = document.querySelector('.pop-up-img').getAttribute('data-number');
-    if(CURRENT_IMAGE_ID === '10'){
-      lastPage();
-    }else if (CURRENT_IMAGE_ID === '1'){
-      firstPage();
-    }else{
-      otherPages();
-    }
+    firstPage()
 
     //Functional of image under pop up
     document.querySelectorAll('.pop-up-other img').forEach(miniImage => {
@@ -39,10 +32,11 @@ document.querySelectorAll('.cars-photos img').forEach(image =>{
           document.querySelector('.pop-up-img').style.width = '60%';
         }
         //  arrow functional
-        const CURRENT_IMAGE_ID = document.querySelector('.pop-up-img').getAttribute('data-number');
-        if(CURRENT_IMAGE_ID === '10'){
+        const CURRENT_IMAGE_NUMBER = +document.querySelector('.chosen-mini-car').getAttribute('data-minicar-number');
+        const IMAGES_COUNT = document.querySelectorAll('.pop-up-other img').length;
+        if(CURRENT_IMAGE_NUMBER === IMAGES_COUNT){
           lastPage();
-        }else if (CURRENT_IMAGE_ID === '1'){
+        }else if (CURRENT_IMAGE_NUMBER === 1){
           firstPage();
         }else{
           otherPages()
@@ -91,10 +85,12 @@ document.querySelector('.fullscreen-icon').addEventListener('click',  async() =>
 
 //Functional for right arrow
 function moveRight () {
-  const NEXT_IMAGE_ID = +document.querySelector('.pop-up-img').getAttribute('data-number') + 1;
-  document.querySelector('.pop-up-img').src = document.getElementById('' + NEXT_IMAGE_ID).src;
-  document.querySelector('.pop-up-img').setAttribute('data-number', '' + NEXT_IMAGE_ID)
-  if(document.querySelector('.pop-up-img').getAttribute('data-number') === '10'){
+  const NEXT_IMG = +document.querySelector('.chosen-mini-car').getAttribute('data-minicar-number') + 1;
+  document.querySelector('.pop-up-img').src = document.querySelector(`.pop-up-other [data-minicar-number = "${NEXT_IMG}"]`).src;
+  document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
+  document.querySelector(`.pop-up-other [data-minicar-number = "${NEXT_IMG}"]`).classList.add('chosen-mini-car');
+  const IMAGES_COUNT = document.querySelectorAll('.pop-up-other img').length;
+  if(NEXT_IMG === IMAGES_COUNT){
     document.querySelector('.arrow-right-icon').removeEventListener('click', moveRight)
     document.querySelector('.pop-up-img-block span:last-child').style.color = "#4d4d4d";
     document.querySelector('.pop-up-img-block span:last-child').style.cursor = "auto";
@@ -103,10 +99,10 @@ function moveRight () {
     document.querySelector('.pop-up-img-block span:first-child').style.color = "white";
     document.querySelector('.pop-up-img-block span:first-child').style.cursor = "pointer";
   }
-  if(document.querySelector('.chosen-mini-car')){
-    document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
-  }
-  document.querySelector(`.mini-car-${NEXT_IMAGE_ID}`).classList.add('chosen-mini-car');
+  // if(document.querySelector('.chosen-mini-car')){
+  //   document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
+  // }
+  // document.querySelector(`.mini-car-${NEXT_IMAGE_ID}`).classList.add('chosen-mini-car');
 }
 function lastPage () {
   document.querySelector('.arrow-right-icon').removeEventListener('click', moveRight);
@@ -135,10 +131,11 @@ function otherPages() {
 
 // Functional for left arrow
 function moveLeft () {
-  const PREV_IMAGE_ID = +document.querySelector('.pop-up-img').getAttribute('data-number') - 1;
-  document.querySelector('.pop-up-img').src = document.getElementById('' + PREV_IMAGE_ID).src;
-  document.querySelector('.pop-up-img').setAttribute('data-number', '' + PREV_IMAGE_ID);
-  if(document.querySelector('.pop-up-img').getAttribute('data-number') === '1'){
+  const PREV_IMG = +document.querySelector('.chosen-mini-car').getAttribute('data-minicar-number') - 1;
+  document.querySelector('.pop-up-img').src = document.querySelector(`.pop-up-other [data-minicar-number = "${PREV_IMG}"]`).src;
+  document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
+  document.querySelector(`.pop-up-other [data-minicar-number = "${PREV_IMG}"]`).classList.add('chosen-mini-car');
+  if(PREV_IMG === 1){
     document.querySelector('.arrow-left-icon').removeEventListener('click', moveLeft);
     document.querySelector('.pop-up-img-block span:first-child').style.color = "#4d4d4d";
     document.querySelector('.pop-up-img-block span:first-child').style.cursor = "auto";
@@ -147,9 +144,14 @@ function moveLeft () {
     document.querySelector('.pop-up-img-block span:last-child').style.color = "white";
     document.querySelector('.pop-up-img-block span:last-child').style.cursor = "pointer";
   }
-  if(document.querySelector('.chosen-mini-car')){
-    document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
-  }
-
-  document.querySelector(`.mini-car-${PREV_IMAGE_ID}`).classList.add('chosen-mini-car');
 }
+
+document.querySelector('.pop-up-img').addEventListener('click', () => {
+  if(document.querySelector('.pop-up-img').style.width === '80%') {
+    document.querySelector('.pop-up-img').style.width = '60%';
+    document.querySelector('.pop-up-img').style.cursor = 'zoom-in';
+  }else{
+    document.querySelector('.pop-up-img').style.width = '80%';
+    document.querySelector('.pop-up-img').style.cursor = 'zoom-out';
+  }
+})
