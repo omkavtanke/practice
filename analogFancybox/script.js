@@ -15,26 +15,11 @@ document.querySelectorAll('.cars-photos img').forEach(image =>{
     //Arrows functional
     const CURRENT_IMAGE_ID = document.querySelector('.pop-up-img').getAttribute('data-number');
     if(CURRENT_IMAGE_ID === '10'){
-      document.querySelector('.arrow-right-icon').removeEventListener('click', moveRight);
-      document.querySelector('.pop-up-img-block span:last-child').style.color = "#4d4d4d";
-      document.querySelector('.pop-up-img-block span:last-child').style.cursor = "auto";
-      document.querySelector('.arrow-left-icon').addEventListener('click', moveLeft);
-      document.querySelector('.pop-up-img-block span:first-child').style.color = "white";
-      document.querySelector('.pop-up-img-block span:first-child').style.cursor = "pointer";
+      lastPage()
     }else if (CURRENT_IMAGE_ID === '1'){
-      document.querySelector('.arrow-left-icon').removeEventListener('click', moveLeft);
-      document.querySelector('.pop-up-img-block span:first-child').style.color = "#4d4d4d";
-      document.querySelector('.pop-up-img-block span:first-child').style.cursor = "auto";
-      document.querySelector('.arrow-right-icon').addEventListener('click', moveRight);
-      document.querySelector('.pop-up-img-block span:last-child').style.color = "white";
-      document.querySelector('.pop-up-img-block span:last-child').style.cursor = "pointer";
+      firstPage()
     }else{
-      document.querySelector('.arrow-right-icon').addEventListener('click', moveRight);
-      document.querySelector('.arrow-left-icon').addEventListener('click', moveLeft);
-      document.querySelector('.pop-up-img-block span:last-child').style.color = "white";
-      document.querySelector('.pop-up-img-block span:last-child').style.cursor = "pointer";
-      document.querySelector('.pop-up-img-block span:first-child').style.color = "white";
-      document.querySelector('.pop-up-img-block span:first-child').style.cursor = "pointer";
+      otherPages()
     }
   };
 })
@@ -57,26 +42,11 @@ document.querySelectorAll('.pop-up-other-img img').forEach(miniImage => {
   //  arrow functional
     const CURRENT_IMAGE_ID = document.querySelector('.pop-up-img').getAttribute('data-number');
     if(CURRENT_IMAGE_ID === '10'){
-      document.querySelector('.arrow-right-icon').removeEventListener('click', moveRight);
-      document.querySelector('.pop-up-img-block span:last-child').style.color = "#4d4d4d";
-      document.querySelector('.pop-up-img-block span:last-child').style.cursor = "auto";
-      document.querySelector('.arrow-left-icon').addEventListener('click', moveLeft);
-      document.querySelector('.pop-up-img-block span:first-child').style.color = "white";
-      document.querySelector('.pop-up-img-block span:first-child').style.cursor = "pointer";
+      lastPage()
     }else if (CURRENT_IMAGE_ID === '1'){
-      document.querySelector('.arrow-left-icon').removeEventListener('click', moveLeft);
-      document.querySelector('.pop-up-img-block span:first-child').style.color = "#4d4d4d";
-      document.querySelector('.pop-up-img-block span:first-child').style.cursor = "auto";
-      document.querySelector('.arrow-right-icon').addEventListener('click', moveRight);
-      document.querySelector('.pop-up-img-block span:last-child').style.color = "white";
-      document.querySelector('.pop-up-img-block span:last-child').style.cursor = "pointer";
+      firstPage()
     }else{
-      document.querySelector('.arrow-right-icon').addEventListener('click', moveRight);
-      document.querySelector('.arrow-left-icon').addEventListener('click', moveLeft);
-      document.querySelector('.pop-up-img-block span:last-child').style.color = "white";
-      document.querySelector('.pop-up-img-block span:last-child').style.cursor = "pointer";
-      document.querySelector('.pop-up-img-block span:first-child').style.color = "white";
-      document.querySelector('.pop-up-img-block span:first-child').style.cursor = "pointer";
+      otherPages()
     }
   })
 })
@@ -102,8 +72,10 @@ document.querySelector('.minicars-icon').addEventListener('click', () => {
 document.querySelector('.zoom-icon').addEventListener('click', () => {
   if(document.querySelector('.pop-up-img').style.width === '80%') {
     document.querySelector('.pop-up-img').style.width = '60%';
+    document.querySelector('.pop-up-img').style.cursor = 'zoom-in';
   }else{
     document.querySelector('.pop-up-img').style.width = '80%';
+    document.querySelector('.pop-up-img').style.cursor = 'zoom-out';
   }
 })
 
@@ -137,6 +109,30 @@ function moveRight () {
   }
   document.querySelector(`.mini-car-${NEXT_IMAGE_ID}`).classList.add('chosen-mini-car');
 }
+function lastPage () {
+  document.querySelector('.arrow-right-icon').removeEventListener('click', moveRight);
+  document.querySelector('.pop-up-img-block span:last-child').style.color = "#4d4d4d";
+  document.querySelector('.pop-up-img-block span:last-child').style.cursor = "auto";
+  document.querySelector('.arrow-left-icon').addEventListener('click', moveLeft);
+  document.querySelector('.pop-up-img-block span:first-child').style.color = "white";
+  document.querySelector('.pop-up-img-block span:first-child').style.cursor = "pointer";
+}
+function firstPage() {
+  document.querySelector('.arrow-left-icon').removeEventListener('click', moveLeft);
+  document.querySelector('.pop-up-img-block span:first-child').style.color = "#4d4d4d";
+  document.querySelector('.pop-up-img-block span:first-child').style.cursor = "auto";
+  document.querySelector('.arrow-right-icon').addEventListener('click', moveRight);
+  document.querySelector('.pop-up-img-block span:last-child').style.color = "white";
+  document.querySelector('.pop-up-img-block span:last-child').style.cursor = "pointer";
+}
+function otherPages() {
+  document.querySelector('.arrow-right-icon').addEventListener('click', moveRight);
+  document.querySelector('.arrow-left-icon').addEventListener('click', moveLeft);
+  document.querySelector('.pop-up-img-block span:last-child').style.color = "white";
+  document.querySelector('.pop-up-img-block span:last-child').style.cursor = "pointer";
+  document.querySelector('.pop-up-img-block span:first-child').style.color = "white";
+  document.querySelector('.pop-up-img-block span:first-child').style.cursor = "pointer";
+}
 
 // Functional for left arrow
 function moveLeft () {
@@ -158,3 +154,12 @@ function moveLeft () {
 
   document.querySelector(`.mini-car-${PREV_IMAGE_ID}`).classList.add('chosen-mini-car');
 }
+document.querySelector('.pop-up-img').addEventListener('click', () => {
+  if(document.querySelector('.pop-up-img').style.width === '80%') {
+    document.querySelector('.pop-up-img').style.width = '60%';
+    document.querySelector('.pop-up-img').style.cursor = 'zoom-in';
+  }else{
+    document.querySelector('.pop-up-img').style.width = '80%';
+    document.querySelector('.pop-up-img').style.cursor = 'zoom-out';
+  }
+})

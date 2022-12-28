@@ -76,8 +76,10 @@ document.querySelector('.minicars-icon').addEventListener('click', () => {
 document.querySelector('.zoom-icon').addEventListener('click', () => {
   if(document.querySelector('.pop-up-img').style.width === '80%') {
     document.querySelector('.pop-up-img').style.width = '60%';
+    document.querySelector('.pop-up-img').style.cursor = 'zoom-in';
   }else{
     document.querySelector('.pop-up-img').style.width = '80%';
+    document.querySelector('.pop-up-img').style.cursor = 'zoom-out';
   }
 })
 
@@ -108,10 +110,6 @@ function moveRight () {
     document.querySelector('.pop-up-img-block span:first-child').style.color = "white";
     document.querySelector('.pop-up-img-block span:first-child').style.cursor = "pointer";
   }
-  // if(document.querySelector('.chosen-mini-car')){
-  //   document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
-  // }
-  // document.querySelector(`.mini-car-${NEXT_IMAGE_ID}`).classList.add('chosen-mini-car');
 }
 function lastPage () {
   document.querySelector('.arrow-right-icon').removeEventListener('click', moveRight);
