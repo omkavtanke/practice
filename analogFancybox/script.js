@@ -108,13 +108,13 @@ document.querySelector('.zoom-icon').addEventListener('click', () => {
 })
 
 //Functional for fullscreen icon
-document.querySelector('.fullscreen-icon').addEventListener('click',  async() => {
-  if (!window.screenTop && !window.screenY) {
-    document.querySelector('.fullscreen-icon').textContent = 'fullscreen_exit'
-    await document.documentElement.requestFullscreen();
+document.querySelector('.fullscreen-icon').addEventListener('click',   () => {
+  if (document.fullscreenElement) {
+    setTimeout(() => document.exitFullscreen(), 100);
+    document.querySelector('.fullscreen-icon').textContent = 'fullscreen';
   }else{
-    document.querySelector('.fullscreen-icon').textContent = 'fullscreen'
-    await document.exitFullscreen();
+    setTimeout(() => document.documentElement.requestFullscreen(), 100);
+    document.querySelector('.fullscreen-icon').textContent = 'fullscreen_exit';
   }
 })
 
@@ -141,7 +141,6 @@ function moveRight () {
 // Functional for left arrow
 function moveLeft () {
   const PREV_IMAGE_ID = +document.querySelector('.pop-up-img').getAttribute('data-number') - 1;
-  console.log(PREV_IMAGE_ID)
   document.querySelector('.pop-up-img').src = document.getElementById('' + PREV_IMAGE_ID).src;
   document.querySelector('.pop-up-img').setAttribute('data-number', '' + PREV_IMAGE_ID);
   if(document.querySelector('.pop-up-img').getAttribute('data-number') === '1'){
