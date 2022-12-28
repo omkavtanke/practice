@@ -82,13 +82,13 @@ document.querySelector('.zoom-icon').addEventListener('click', () => {
 })
 
 //Functional for fullscreen icon
-document.querySelector('.fullscreen-icon').addEventListener('click',  async() => {
-  if (!window.screenTop && !window.screenY) {
-    document.querySelector('.fullscreen-icon').textContent = 'fullscreen_exit'
-    await document.documentElement.requestFullscreen();
+document.querySelector('.fullscreen-icon').addEventListener('click',   () => {
+  if (document.fullscreenElement) {
+    setTimeout(() => document.exitFullscreen(), 100);
+    document.querySelector('.fullscreen-icon').textContent = 'fullscreen';
   }else{
-    document.querySelector('.fullscreen-icon').textContent = 'fullscreen'
-    await document.exitFullscreen();
+    setTimeout(() => document.documentElement.requestFullscreen(), 100);
+    document.querySelector('.fullscreen-icon').textContent = 'fullscreen_exit';
   }
 })
 
