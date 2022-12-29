@@ -1,55 +1,63 @@
+// arrows and  scroll functional
+let scrollWidth = 0;
+let firstimgWidth = 0;
+let currentCarName = '';
+
 //Pop up functional
 document.querySelectorAll('.cars-photos img').forEach(image =>{
   image.addEventListener('click', () => {
-    document.querySelector('.pop-up-img').src = image.src;
     document.querySelector('body').style.overflowY = 'hidden'
     document.querySelector('.pop-up-block').style.display = 'block';
-    document.querySelector('.pop-up-img').setAttribute('data-number', image.id);
-    if(document.querySelector('.chosen-mini-car')){
+    if(document.querySelector('.chosen-mini-car')) {
       document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car')
     }
-    //Mini image under pop up functional
-    const CAR_NAME = image.getAttribute('data-car-name');
-    document.querySelector('.mini-images').innerHTML = document.querySelector(`.${CAR_NAME}-other`).innerHTML;
-    document.querySelector(`.pop-up-other .mini-car-${CAR_NAME}-1`).classList.add('chosen-mini-car');
-    //Car info functional
-    const CAR_INFO = document.querySelector(`.${CAR_NAME}-info-text`).innerHTML
-    document.querySelector('.icons-block .car-info-text').innerHTML = CAR_INFO;
 
-    //Arrows functional
-    firstPage()
+    //return scrol to start
+    document.querySelector('.pop-up-img-carousel').scrollLeft = 0;
+    setTimeout(showHideIcons, 800);
+
+    //Pop-up images carousel
+    currentCarName = image.getAttribute('data-car-name');
+    document.querySelector('.pop-up-img-carousel').innerHTML = document.querySelector(`.${currentCarName}-other`).innerHTML;
+
+    //zoom
+    document.querySelector('.pop-up-img-wrapper').style.width = document.body.clientWidth > 730 ? '60%' : '90%';
+
+    //Mini image under pop up functional
+    document.querySelector('.mini-images').innerHTML = document.querySelector(`.${currentCarName}-other`).innerHTML;
+    document.querySelector(`.pop-up-other .mini-car-${currentCarName}-1`).classList.add('chosen-mini-car');
+
+    //Car info functional
+    const CAR_INFO = document.querySelector(`.${currentCarName}-info-text`).innerHTML
+    document.querySelector('.icons-block .car-info-text').innerHTML = CAR_INFO;
 
     //miniImage functional
     if(document.querySelector('.pop-up-other').style.display === 'none') {
       document.querySelector('.pop-up-other').style.display = 'flex';
-      document.querySelector('.pop-up-img').style.width = '60%';
     }
+
+    //arrows and scrolling functional
+    const carousel = document.querySelector('.pop-up-img-carousel');
+    scrollWidth = carousel.scrollWidth - carousel.clientWidth;
+    const firstImg = carousel.querySelectorAll('img')[0];
+    let marginBetweenImg = 4.800024414062477;
+    firstimgWidth = firstImg.clientWidth + marginBetweenImg;
 
     //Functional of image under pop up
     document.querySelectorAll('.pop-up-other img').forEach(miniImage => {
       miniImage.addEventListener('click', () => {
-        document.querySelector('.pop-up-img').src = miniImage.src;
-        const MINICAR_NUMBER = miniImage.getAttribute('data-minicar-number');
-        document.querySelector('.pop-up-img').setAttribute('data-number', MINICAR_NUMBER);
+
+        //change popup img by clicking mini image
+        const clickedMiniCarNumber = miniImage.getAttribute('data-minicar-number');
+        const carousel = document.querySelector('.pop-up-img-carousel');
+        carousel.scrollLeft = firstimgWidth * (clickedMiniCarNumber - 1);
+
         if(document.querySelector('.chosen-mini-car')) {
           document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
         }
         miniImage.classList.add('chosen-mini-car');
 
-        //  check for zoomed image
-        if(document.querySelector('.pop-up-img').style.width === '80%'){
-          document.querySelector('.pop-up-img').style.width = '60%';
-        }
-        //  arrow functional
-        const CURRENT_IMAGE_NUMBER = +document.querySelector('.chosen-mini-car').getAttribute('data-minicar-number');
-        const IMAGES_COUNT = document.querySelectorAll('.pop-up-other img').length;
-        if(CURRENT_IMAGE_NUMBER === IMAGES_COUNT){
-          lastPage();
-        }else if (CURRENT_IMAGE_NUMBER === 1){
-          firstPage();
-        }else{
-          otherPages()
-        }
+        setTimeout(showHideIcons, 800)
       });
     })
   });
@@ -72,17 +80,6 @@ document.querySelector('.minicars-icon').addEventListener('click', () => {
   }
 })
 
-//Functional for search/zoom icon
-document.querySelector('.zoom-icon').addEventListener('click', () => {
-  if(document.querySelector('.pop-up-img').style.width === '80%') {
-    document.querySelector('.pop-up-img').style.width = '60%';
-    document.querySelector('.pop-up-img').style.cursor = 'zoom-in';
-  }else{
-    document.querySelector('.pop-up-img').style.width = '80%';
-    document.querySelector('.pop-up-img').style.cursor = 'zoom-out';
-  }
-})
-
 //Functional for fullscreen icon
 document.querySelector('.fullscreen-icon').addEventListener('click',   () => {
   if (document.fullscreenElement) {
@@ -94,25 +91,133 @@ document.querySelector('.fullscreen-icon').addEventListener('click',   () => {
   }
 })
 
-//Functional for right arrow
-function moveRight () {
-  const NEXT_IMG = +document.querySelector('.chosen-mini-car').getAttribute('data-minicar-number') + 1;
-  document.querySelector('.pop-up-img').src = document.querySelector(`.pop-up-other [data-minicar-number = "${NEXT_IMG}"]`).src;
-  document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
-  document.querySelector(`.pop-up-other [data-minicar-number = "${NEXT_IMG}"]`).classList.add('chosen-mini-car');
-  const IMAGES_COUNT = document.querySelectorAll('.pop-up-other img').length;
-  if(NEXT_IMG === IMAGES_COUNT){
-    document.querySelector('.arrow-right-icon').removeEventListener('click', moveRight)
-    document.querySelector('.pop-up-img-block span:last-child').style.color = "#4d4d4d";
-    document.querySelector('.pop-up-img-block span:last-child').style.cursor = "auto";
+document.querySelector('.pop-up-img').addEventListener('click', () => {
+  if(document.querySelector('.pop-up-img').style.width === '80%') {
+    document.querySelector('.pop-up-img').style.width = '60%';
+    document.querySelector('.pop-up-img').style.cursor = 'zoom-in';
   }else{
-    document.querySelector('.arrow-left-icon').addEventListener('click', moveLeft);
-    document.querySelector('.pop-up-img-block span:first-child').style.color = "white";
-    document.querySelector('.pop-up-img-block span:first-child').style.cursor = "pointer";
+    document.querySelector('.pop-up-img').style.width = '80%';
+    document.querySelector('.pop-up-img').style.cursor = 'zoom-out';
+  }
+})
+
+// Scrolling functional
+const carousel = document.querySelector('.pop-up-img-carousel');
+const showHideIcons = () => {
+  if(carousel.scrollLeft === 0){
+    firstPage()
+  }else if(Math.floor(carousel.scrollLeft) ===  scrollWidth) {
+    lastPage()
+  }else{
+    otherPages()
   }
 }
+let isDragStart = false, isDragging = false, prevPageX, prevScrollLeft, positionDiff;
+
+const autoSlide = () => {
+  if(Math.trunc(carousel.scrollLeft) === (carousel.scrollWidth - carousel.clientWidth)) return;
+  else if(carousel.scrollLeft === 0) return;
+  positionDiff = Math.abs(positionDiff);
+  let valDifference = firstimgWidth - positionDiff;
+  if(carousel.scrollLeft > prevScrollLeft){
+    return carousel.scrollLeft += positionDiff > firstimgWidth / 3 ? valDifference : -positionDiff;
+  }else{
+    carousel.scrollLeft -= positionDiff > firstimgWidth / 3 ? valDifference : -positionDiff;
+  }
+}
+const dragStart = (e) => {
+  isDragStart = true;
+  prevPageX = e.pageX || e.touches[0].pageX;
+  prevScrollLeft = carousel.scrollLeft;
+}
+const dragging = (e) => {
+  if(!isDragStart)return;
+  setTimeout(showHideIcons, 100);
+  isDragging = true;
+  carousel.classList.add('dragging')
+  carousel.scrollLeft = e.pageX;
+  e.preventDefault();
+  positionDiff = (e.pageX || e.touches[0].pageX) - prevPageX
+  carousel.scrollLeft = prevScrollLeft - positionDiff;
+}
+const dragStop = () => {
+  carousel.classList.remove('dragging')
+  isDragStart = false;
+
+  if(!isDragging)return;
+  isDragging = false;
+  autoSlide();
+  setTimeout(showHideIcons, 500);
+  setTimeout(updateMiniImages, 500);
+}
+carousel.addEventListener('mousedown', dragStart);
+carousel.addEventListener('touchstart', dragStart);
+
+carousel.addEventListener('mousemove', dragging);
+carousel.addEventListener('touchmove', dragging);
+
+carousel.addEventListener('mouseup', dragStop);
+carousel.addEventListener('mouseleave', dragStop);
+carousel.addEventListener('touchend', dragStop);
+
+//under pop-up functional
+function updateMiniImages(){
+  if(carousel.scrollLeft === 0){
+    document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
+    document.querySelector(`.pop-up-other .mini-car-${currentCarName}-1`).classList.add('chosen-mini-car');
+  }else{
+    let currentCarNumber = (carousel.scrollLeft / firstimgWidth + 1 );
+    document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
+    document.querySelector(`.pop-up-other .mini-car-${currentCarName}-${Math.ceil(currentCarNumber)}`).classList.add('chosen-mini-car');
+  }
+}
+
+
+// arrows functional
+const arrows = document.querySelectorAll('.pop-up-img-block span')
+
+
+function moveRight (){
+  carousel.scrollLeft += firstimgWidth
+  setTimeout(() => {
+    if(Math.ceil(carousel.scrollLeft) === scrollWidth){
+      lastPage()
+    }else{
+      otherPages()
+    }
+  }, 500)
+  setTimeout(updateMiniImages, 500);
+}
+function moveLeft () {
+  carousel.scrollLeft -= firstimgWidth
+  setTimeout(() => {
+    if(carousel.scrollLeft === 0){
+      firstPage()
+    }else{
+      otherPages()
+    }
+  }, 500)
+  setTimeout(updateMiniImages, 500);
+}
+
+arrows.forEach( arrow => {
+  arrow.addEventListener('click', () => {
+    if(arrow.id === 'left'){
+      carousel.scrollLeft -= firstimgWidth;
+      setTimeout(showHideIcons, 800)
+      setTimeout(updateMiniImages, 500);
+    }else{
+      setTimeout(showHideIcons, 800)
+      setTimeout(updateMiniImages, 500);
+      carousel.scrollLeft += firstimgWidth;
+      otherPages()
+    }
+  });
+})
+const arrowRight = document.querySelector('.arrow-right-icon');
+const arrowLeft = document.querySelector('.arrow-left-icon');
 function lastPage () {
-  document.querySelector('.arrow-right-icon').removeEventListener('click', moveRight);
+  arrowRight.replaceWith(arrowRight.cloneNode(true));
   document.querySelector('.pop-up-img-block span:last-child').style.color = "#4d4d4d";
   document.querySelector('.pop-up-img-block span:last-child').style.cursor = "auto";
   document.querySelector('.arrow-left-icon').addEventListener('click', moveLeft);
@@ -120,7 +225,7 @@ function lastPage () {
   document.querySelector('.pop-up-img-block span:first-child').style.cursor = "pointer";
 }
 function firstPage() {
-  document.querySelector('.arrow-left-icon').removeEventListener('click', moveLeft);
+  arrowLeft.replaceWith(arrowLeft.cloneNode(true));
   document.querySelector('.pop-up-img-block span:first-child').style.color = "#4d4d4d";
   document.querySelector('.pop-up-img-block span:first-child').style.cursor = "auto";
   document.querySelector('.arrow-right-icon').addEventListener('click', moveRight);
@@ -136,29 +241,3 @@ function otherPages() {
   document.querySelector('.pop-up-img-block span:first-child').style.cursor = "pointer";
 }
 
-// Functional for left arrow
-function moveLeft () {
-  const PREV_IMG = +document.querySelector('.chosen-mini-car').getAttribute('data-minicar-number') - 1;
-  document.querySelector('.pop-up-img').src = document.querySelector(`.pop-up-other [data-minicar-number = "${PREV_IMG}"]`).src;
-  document.querySelector('.chosen-mini-car').classList.remove('chosen-mini-car');
-  document.querySelector(`.pop-up-other [data-minicar-number = "${PREV_IMG}"]`).classList.add('chosen-mini-car');
-  if(PREV_IMG === 1){
-    document.querySelector('.arrow-left-icon').removeEventListener('click', moveLeft);
-    document.querySelector('.pop-up-img-block span:first-child').style.color = "#4d4d4d";
-    document.querySelector('.pop-up-img-block span:first-child').style.cursor = "auto";
-  }else{
-    document.querySelector('.arrow-right-icon').addEventListener('click', moveRight);
-    document.querySelector('.pop-up-img-block span:last-child').style.color = "white";
-    document.querySelector('.pop-up-img-block span:last-child').style.cursor = "pointer";
-  }
-}
-
-document.querySelector('.pop-up-img').addEventListener('click', () => {
-  if(document.querySelector('.pop-up-img').style.width === '80%') {
-    document.querySelector('.pop-up-img').style.width = '60%';
-    document.querySelector('.pop-up-img').style.cursor = 'zoom-in';
-  }else{
-    document.querySelector('.pop-up-img').style.width = '80%';
-    document.querySelector('.pop-up-img').style.cursor = 'zoom-out';
-  }
-})
